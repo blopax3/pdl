@@ -8,10 +8,10 @@ public class StateMachine {
 
     public StateMachine(String s) {
         this.s = s;
-        inicialize();
+        initialize();
     }
 
-    public void inicialize() {
+    public void initialize() {
         actualState = dfa.getInitialState();
     }
 

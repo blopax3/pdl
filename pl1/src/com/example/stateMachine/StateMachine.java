@@ -3,10 +3,11 @@ package com.example.stateMachine;
 public class StateMachine {
 
     private Integer actualState;
-    private Automaton dfa = new Automaton();
+    private Automaton dfa;
     private String s;
 
-    public StateMachine(String s) {
+    public StateMachine(Automaton dfa, String s) {
+        this.dfa = dfa;
         this.s = s;
         initialize();
     }

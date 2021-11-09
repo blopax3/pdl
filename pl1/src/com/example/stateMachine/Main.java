@@ -1,66 +1,101 @@
 package com.example.stateMachine;
 
+import java.lang.reflect.AnnotatedType;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
         //a(!+a)*(bc*(m+n+ñ+o+p+q))(!+(bc*(m+n+ñ+o+p+q)))*
         // Escribir Leer Asignar
 
-        // Pregunta 1
+        // Alphabets
 
-        int[][] matrix = {{0, 'a', 1}, {1, 'a', 2}, {1, 'b', 3},
-                {2, 'a', 2}, {2, 'b', 3}, {3, 'c', 8},
-                {3, 'm', 4}, {3, 'n', 6}, {3, 'ñ', 9},
-                {3, 'o', 7}, {3, 'p', 10}, {3, 'q', 5},
-                {4, 'b', 11}, {5, 'b', 11}, {6, 'b', 11},
-                {7, 'b', 11}, {8, 'c', 8}, {8, 'm', 4},
-                {8, 'n', 6}, {8, 'ñ', 9}, {8, 'o', 7},
-                {8, 'p', 10}, {8, 'q', 5}, {9, 'b', 11},
-                {10, 'b', 11}, {11, 'c', 16}, {11, 'm', 12},
-                {11, 'n', 14}, {11, 'ñ', 17}, {11, 'o', 15},
-                {11, 'p', 18}, {11, 'q', 13}, {12, 'b', 11},
-                {13, 'b', 11}, {14, 'b', 11}, {15, 'b', 11},
-                {16, 'c', 16}, {16, 'm', 12}, {16, 'n', 14},
-                {16, 'ñ', 17}, {16, 'o', 15}, {16, 'p', 18},
-                {16, 'q', 13}, {17, 'b', 11}, {18, 'b', 11}};
-        int[] finalStates = {4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 17, 18};
-        int statesNumb = 19;
+        List<Character> lowerCaseAlphabet = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+        List<Character> capitalCaseAlphabet = Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+        List<Character> accentsAlphabet = Arrays.asList('á', 'Á', 'é', 'É', 'í', 'Í', 'ó', 'Ó', 'ú', 'Ú');
+        List<Character> numberAlphabet = Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        List<Character> specialCharactersAlphabet = Arrays.asList(' ', '!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '?', '¿', '\'');
 
-        // Escribir
-
-        int[][] writeMatrix = {{0, 'E', 1}, {1, 's', 2}, {2, 'c', 3},
-                {3, 'r', 4}, {4, 'i', 5}, {5, 'b', 6},
-                {6, 'i', 7}, {7, 'r', 8}};
-        int[] writeFinalStates = {8};
-        int writeStatesNumb = 9;
-
-        // Leer
-
-        int[][] readMatrix = {{0, 'L', 1}, {1, 'e', 2}, {2, 'e', 3}, {3, 'r', 4}};
-        int[] readFinalStates = {4};
-        int readStatesNumb = 5;
-
-        // Asignar
-
-        int[][] assignMatrix = {{0, 'A', 1}, {1, 's', 2}, {2, 'i', 3},
-                {3, 'g', 4}, {4, 'n', 5}, {5, 'a', 6}, {6, 'r', 7}};
-        int[] assignFinalStates = {7};
-        int assignStatesNumb = 8;
+        // pseint alphabet
+        List<Character> pseintAlphabet = new ArrayList<>();
+        pseintAlphabet.addAll(lowerCaseAlphabet);
+        pseintAlphabet.addAll(capitalCaseAlphabet);
+        pseintAlphabet.addAll(accentsAlphabet);
+        pseintAlphabet.addAll(numberAlphabet);
+        pseintAlphabet.addAll(specialCharactersAlphabet);
 
 
-        // TIPOS DE DATOS
+        // lower and Capital Case Letters (reserves words)
+        List<Character> lowerCapitalAlphabet = new ArrayList<>();
+        lowerCapitalAlphabet.addAll(lowerCaseAlphabet);
+        lowerCapitalAlphabet.addAll(capitalCaseAlphabet);
 
-        // Numerico(enteros, reales) -> -?[0-9]* // -?[0-9]*.[0-9]
-        // Logico (VERDADERO, FALSO)
-        // Carácter -> "[a-9]*" // '[a-9*]'
+        // numbers (numerics data type)
+        List<Character> numericAlphabet = new ArrayList<>();
+        numericAlphabet.addAll(numberAlphabet);
+        numericAlphabet.add('-');
+        numericAlphabet.add('.');
 
-        Automaton dfa = new Automaton(matrix, finalStates, statesNumb);
-        Automaton write = new Automaton(writeMatrix, writeFinalStates, writeStatesNumb);
-        Automaton read = new Automaton(readMatrix, readFinalStates, readStatesNumb);
-        Automaton assign = new Automaton(assignMatrix, assignFinalStates, assignStatesNumb);
-        StateMachine st = new StateMachine(assign, "Asignar");
-        System.out.println(st.checkString());
+        // String (Character data type)
+        List<Character> characterAlphabet = new ArrayList<>();
+        characterAlphabet.addAll(lowerCapitalAlphabet);
+        characterAlphabet.addAll(numberAlphabet);
+        characterAlphabet.addAll(specialCharactersAlphabet);
 
 
+        // Dada una cadena de texto de entrada, analizarla para determinar si esa cadena de texto
+        // cumple con la ER original de los ejemplos del enunciado.
+
+
+        // Escribir --> (E+e)(S+s)(C+c)(R+r)(I+i)(B+b)(I+i)(R+r)
+
+        // Leer --> (L+l)(E+e)(E+e)(R+r)
+
+        // Asignar --> (A+a)(S+s)(I+i)(G+g)(N+n)(A+a)(R+r)
+
+
+        // ######## TIPOS DE DATOS
+
+        // ### Numerico(enteros, reales) -> -?[0-9]* // -?[0-9]*(.[0-9]*)? --> (!+-)(0+1+2+3+4+5+6+7+8+9)(0+1+2+3+4+5+6+7+8+9)*(!+.(0+1+2+3+4+5+6+7+8+9)(0+1+2+3+4+5+6+7+8+9)*)
+
+        // ### Logico (VERDADERO, FALSO)
+
+        // VERDADERO --> (V+v)(E+e)(R+r)(D+d)(A+a)(D+d)(E+e)(R+r)(O+o)
+
+        // FALSO --> (F+f)(A+a)(L+l)(S+s)(O+o)
+
+
+        // ### Carácter -> "[a-9]*" // '[a-9*]' -> "(a+b+c+d+e+f+g+h+i+j+k+l+m+n+ñ+o+p+q+r+s+t+u+v+w+x+y+z+A+B+C+D+E+F+G+H+I+J+K+L+M+N+Ñ+O+P+Q+R+S+T+U+V+W+X+Y+Z+0+1+2+3+4+5+6+7+8+9+@+#+$+%+,+-+.+/+:+;+?+¿+ +"+')*"
+
+
+        Automaton exampleAutomaton = new Automaton("exampleAutomaton", lowerCaseAlphabet);
+        //
+        Automaton writeAutomaton = new Automaton("writeAutomaton", pseintAlphabet);
+        Automaton readAutomaton = new Automaton("readAutomaton", pseintAlphabet);
+        Automaton assignAutomaton = new Automaton("assignAutomaton", pseintAlphabet);
+        Automaton[] reservedWords = {writeAutomaton, readAutomaton, assignAutomaton};
+        //
+        Automaton numericAutomaton = new Automaton("numericAutomaton", pseintAlphabet);
+        Automaton trueAutomaton = new Automaton("trueAutomaton", pseintAlphabet);
+        Automaton falseAutomaton = new Automaton("falseAutomaton", pseintAlphabet);
+        Automaton[] logic = {trueAutomaton, falseAutomaton};
+        Automaton charAutomaton = new Automaton("charAutomaton", pseintAlphabet);
+
+
+
+        // COMPROBACIONES ENUNCIADO
+        //
+        StateMachine strExample = new StateMachine(exampleAutomaton, "abcccñ");
+        System.out.println(strExample.checkString());
+        //
+        StateMachine reservedWord = new StateMachine(reservedWords, "AsignaR");
+        System.out.println(reservedWord.reservedWord());
+        //
+        StateMachine dataType = new StateMachine(numericAutomaton, logic, charAutomaton, "\"Hola, ¿Que tal estas?. 'a' es diferente de \"a\"\"");
+        System.out.println(dataType.basicDataType());
     }
 }

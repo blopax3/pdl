@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>208.0</x>
+			<y>51.0</y>
+			<label>0,2,20,22</label>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>166.0</x>
+			<y>132.0</y>
+			<label>21,3,4,24,26</label>
+		</state>
+		<state id="2" name="q2">
+			<x>196.0</x>
+			<y>30.0</y>
+			<label>4,3,24,23,26</label>
+		</state>
+		<state id="3" name="q3">
+			<x>431.0</x>
+			<y>215.0</y>
+			<label>16,5,25,18,6</label>
+		</state>
+		<state id="4" name="q4">
+			<x>525.0</x>
+			<y>30.0</y>
+			<label>16,5,27,18,6</label>
+		</state>
+		<state id="5" name="q5">
+			<x>680.0</x>
+			<y>149.0</y>
+			<label>14,12,7,8,17</label>
+		</state>
+		<state id="6" name="q6">
+			<x>552.0</x>
+			<y>353.0</y>
+			<label>14,12,7,19,8</label>
+		</state>
+		<state id="7" name="q7">
+			<x>711.0</x>
+			<y>216.0</y>
+			<label>13,28,30,9,10</label>
+		</state>
+		<state id="8" name="q8">
+			<x>543.0</x>
+			<y>577.0</y>
+			<label>28,30,15,9,10</label>
+		</state>
+		<state id="9" name="q9">
+			<x>766.0</x>
+			<y>637.0</y>
+			<label>29,11,1</label>
+			<final/>
+		</state>
+		<state id="10" name="q10">
+			<x>870.0</x>
+			<y>432.0</y>
+			<label>1,11,31</label>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>2</to>
+			<read>f</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>8</to>
+			<read>s</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>F</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>8</to>
+			<read>s</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>6</to>
+			<read>l</read>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>9</to>
+			<read>O</read>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>10</to>
+			<read>o</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>3</to>
+			<read>A</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>A</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>7</to>
+			<read>S</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>6</to>
+			<read>l</read>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>9</to>
+			<read>O</read>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>10</to>
+			<read>o</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>7</to>
+			<read>S</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>5</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>4</to>
+			<read>a</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>4</to>
+			<read>a</read>
+		</transition>
+	</automaton>
+</structure>

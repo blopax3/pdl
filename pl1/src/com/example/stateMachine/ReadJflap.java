@@ -32,6 +32,7 @@ public class ReadJflap {
 
     public ReadJflap(String name) {
 
+        // Nombre del archivo a leer
         this.FILENAME = "jflapMatrix/" + name + ".jff";
 
         dbf = DocumentBuilderFactory.newInstance();
@@ -66,26 +67,29 @@ public class ReadJflap {
     }
 
     public void generateData() {
-        // get <state>
+
         NodeList states = doc.getElementsByTagName("state");
 
+        // En el bucle se recorren todos los estados y se genera la lista de estados
+        // A su vez, se comprueba si los estados son finales, añadiéndolos a la lista de estados finales si es el caso
+        // También se empieza a generar el HashMap que hace como matriz de transición de estados
         for (int temp = 0; temp < states.getLength(); temp++) {
             Node node = states.item(temp);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 Integer state = Integer.valueOf(element.getAttribute("id"));
-                this.states.add(state); // generate list states
-                matrix.put(state, new HashMap<Character, Integer>()); // initialize matrix
+                this.states.add(state); // Generar lista de estados
+                matrix.put(state, new HashMap<Character, Integer>()); // Inicializar matriz
                 NodeList fin = element.getElementsByTagName("final");
                 if (fin.getLength() > 0) {
-                    finalStates.add(state);
+                    finalStates.add(state); // Generar lista estados finales
                 }
             }
         }
 
-        // get <transition>
         NodeList transition = doc.getElementsByTagName("transition");
 
+        // El bucle recorre todas las transiciones entre estados terminando de crear la matriz de transición de estados
         for (int temp = 0; temp < transition.getLength(); temp++) {
             Node node = transition.item(temp);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -94,12 +98,13 @@ public class ReadJflap {
                 Integer to = Integer.valueOf(element.getElementsByTagName("to").item(0).getTextContent());
                 Character read = element.getElementsByTagName("read").item(0).getTextContent().charAt(0);
 
-                this.matrix.get(from).put(read, to);
+                this.matrix.get(from).put(read, to); // Terminar de generar la matriz
 
             }
         }
     }
 
+    // Getters de las estructuras de datos creadas
     public List<Integer> getStates() {
         return states;
     }
